@@ -7,7 +7,7 @@ OpenCV opencv;
 Rectangle[] faces;
 
 int fx = 0, fy = 0, fw = 0, fh = 0, fi;
-float cratio, fratio;
+float cratio;
 
 void setup() {
   
@@ -21,11 +21,12 @@ void setup() {
 }
 
 void draw() {
+
+  background(0);
+  noFill();
   
   if (cam.available()) {
     cam.read();
-    background(0);
-    noFill();
   }
 
   opencv.loadImage(cam);
@@ -47,7 +48,6 @@ void draw() {
   if (fi > -1) { // face(s) detected
     
     cratio = float(width) / float(height);
-    fratio = float(fw) / float(fh);
     
     image(cam, 0, 0);
     copy(cam, int(fx - (fw * cratio - fw) / 2), fy, int(fw * cratio), fh, 0, 0, width, height);
